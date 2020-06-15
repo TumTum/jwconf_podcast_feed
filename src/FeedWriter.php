@@ -66,7 +66,7 @@ class FeedWriter
         ;
 
         $fileInfo = new \SplFileInfo(Config::$database_path);
-        $lastBuildDate = $pubDate =  new \DateTime($fileInfo->getMTime(), new \DateTimeZone('UTC'));
+        $lastBuildDate = $pubDate =  new \DateTime('@'.$fileInfo->getMTime(), new \DateTimeZone('UTC'));
 
         $channel->setTitle('JZ - Radiosendungen')
             ->setLink('https://jwconf.oik.gr/')

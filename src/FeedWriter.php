@@ -69,12 +69,10 @@ class FeedWriter
         $lastBuildDate = $pubDate =  new \DateTime('@'.$fileInfo->getMTime(), new \DateTimeZone('UTC'));
 
         $channel->setTitle('JZ - Radiosendungen')
-            ->setLink('https://jwconf.oik.gr/')
+            ->setLink('https://podcast.jwconf.oik.gr/')
             ->setDescription('Monatliche Radiosendungen von Jehovas Zeugen')
             ->setLanguage('de')
-            ->setCopyright('(c) 2020 T. Matt')
-            ->setManagingEditor('developer@tobimat.eu (Tobi Matt)')
-            ->setWebMaster('developer@tobimat.eu (Tobi Matt)')
+            ->setWebMaster('developer@tobimat.eu')
             ->setPubDate($pubDate)
             ->setLastBuildDate($lastBuildDate)
             ->setDocs('https://www.rssboard.org/rss-specification')
@@ -84,7 +82,7 @@ class FeedWriter
             ->setRating('R')
         ;
 
-        $channel->addExtension((new Sy())->setUpdatePeriod(Sy::PERIOD_WEEKLY));
+        $channel->addExtension((new Sy())->setUpdatePeriod(Sy::PERIOD_MONTHLY));
 
         $this->addItems($channel, $source);
 
@@ -115,7 +113,7 @@ class FeedWriter
 
             $item = new Item();
             $item->setTitle($sendung->getThema())
-                ->setDescription(sprintf('Radiosendungen mit dem Thema "%s" gesendet am "%s" im "%s"', $sendung->getThema(), $pubdate->format('d.m.Y'), $sendung->getSender()))
+                ->setDescription(sprintf('Radiosendungen wurde am "%s" ausgestrahlt im "%s"', $pubdate->format('d.m.Y'), $sendung->getSender()))
                 ->setLink(Config::$jwconf_url)
                 ->setAuthor($sendung->getSender())
                 ->setEnclosure($enclosure)

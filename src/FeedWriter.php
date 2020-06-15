@@ -88,6 +88,7 @@ class FeedWriter
 
         $this->addItems($channel, $source);
 
+        header('Content-Type: application/rss+xml');
         print $rssWriter->writeChannel($channel);
     }
 

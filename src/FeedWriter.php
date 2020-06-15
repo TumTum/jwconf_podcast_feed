@@ -121,7 +121,7 @@ class FeedWriter
                 ->setEnclosure($enclosure)
                 ->setPubDate($pubdate)
                 ->setSource($source)
-                ->setGuid((new Guid())->setIsPermaLink(false)->setGuid('tag:jwconf.org,Was macht gute Freunde aus:jz:radio'));
+                ->setGuid((new Guid())->setIsPermaLink(false)->setGuid('tag:jz:'.$sendung->get('id').':radio'));
 
             $channel->addItem($item);
         }

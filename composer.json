@@ -1,0 +1,26 @@
+{
+  "name": "matthaiou/jwconfRss",
+  "description": "genneriert den Feed für jwConf",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "tmatthaiou",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "marcw/rss-writer": "^0.4",
+    "wa72/htmlpagedom": "^2",
+    "ark/database": "^0.2",
+    "guzzlehttp/guzzle": "^6"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^5"
+  },
+  "autoload": {
+    "psr-4": {
+      "tm\\rss\\": "./src"
+    }
+  }
+}

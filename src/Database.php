@@ -39,7 +39,7 @@ class Database
      */
     public function getSendungen()
     {
-        return $this->db->factory(Sendung::class)->findAll();
+        return $this->db->factory(Sendung::class)->findMany('1', [], 'pubdate DESC');
     }
 
     /**
@@ -49,4 +49,13 @@ class Database
     {
         return $this->db->factory(Sendung::class)->create();
     }
+
+    /**
+     * @return \Ark\Database\Model|Sendung|false
+     */
+    public function findSendung($checksume)
+    {
+        return $this->db->factory(Sendung::class)->findOneBy('checksum', $checksume);
+    }
+
 }

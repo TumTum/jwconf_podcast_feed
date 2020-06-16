@@ -8,9 +8,8 @@
 
 namespace tm\rss;
 
-
-use GuzzleHttp\Client;
-use tm\rss\model\Sendung;
+use tm\rss\core\MediaData;
+use tm\rss\dao\SendungData;
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class Crawler
@@ -27,8 +26,6 @@ class Crawler
 
     public function run()
     {
-        $this->db->getSendung()->truncateTable();
-
         $htmlPageCrawler = HtmlPageCrawler::create((new JWConfPage())->getHTML());
         $htmlPageCrawler->filter("table > tbody > tr")->each(function (HtmlPageCrawler $dom, $index) {
             $this->addSendung($dom);
@@ -38,57 +35,57 @@ class Crawler
 
     protected function addSendung($dom)
     {
-        $sendung = $this->db->getSendung();
+        $sendungData = new SendungData();
 
-        $dom->filter('td')->each(function (HtmlPageCrawler $dom, $index) use ($sendung) {
+        $dom->filter('td')->each(function (HtmlPageCrawler $dom, $index) use ($sendungData) {
             $column = [
                 'getDomPubdate',
                 'getDomThema',
                 'getDomSender',
             ];
-            call_user_func_array([$this, $column[$index]], [$dom, $sendung]);
+            call_user_func_array([$this, $column[$index]], [$dom, $sendungData]);
         });
-        $sendung->save();
+
+        $isExitsDb = $this->db->findSendung($sendungData->getChecksum());
+        if ($isExitsDb === false) {
+            $this->addToDb($sendungData);
+        }
     }
 
-    protected function getDomPubdate(HtmlPageCrawler $dom, Sendung $sendung)
+    protected function getDomPubdate(HtmlPageCrawler $dom, SendungData $sendungData)
     {
         $date = $dom->getInnerHtml();
-        $dateTime = date_create_from_format('d.m.Y', $date);
-        $sendung->setPubdate($dateTime->getTimestamp());
+        $sendungData->setPubdate($date);
     }
 
-    protected function getDomThema(HtmlPageCrawler $dom, Sendung $sendung)
+    protected function getDomThema(HtmlPageCrawler $dom, SendungData $sendungData)
     {
         $mediaLink = $dom->filter('a');
 
-        $sendung->setThema($mediaLink->getInnerHtml());
-
-        $link = $mediaLink->attr('href');
-
-        $url = Config::$jwconf_host . ltrim($link, '/');
-        $sendung->setUrl($url);
-
-        $client = new Client(['base_uri' => Config::$jwconf_host]);
-        $res = $client->request(
-            'HEAD',
-            $link,
-            [
-                'headers' => [
-                    'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'
-                ]
-            ]
-        );
-
-        $length = $res->getHeaderLine('Content-Length') ? : 0;
-        $type = $res->getHeaderLine('Content-Type') ? : 'audio/mpeg';
-
-        $sendung->setLength($length);
-        $sendung->setType($type);
+        $sendungData->setThema($mediaLink->getInnerHtml());
+        $sendungData->setHref($mediaLink->attr('href'));
     }
 
-    protected function getDomSender(HtmlPageCrawler $dom, Sendung $sendung)
+    protected function getDomSender(HtmlPageCrawler $dom, SendungData $sendungData)
     {
-        $sendung->setSender($dom->getInnerHtml());
+        $sendungData->setSender($dom->getInnerHtml());
+    }
+
+    /**
+     * @param SendungData $sendungData
+     */
+    protected function addToDb(SendungData $sendungData)
+    {
+        (new MediaData($sendungData))->fetch();
+
+        $this->db->getSendung()
+            ->setPubdate($sendungData->getPubdate())
+            ->setThema($sendungData->getThema())
+            ->setSender($sendungData->getSender())
+            ->setUrl($sendungData->getUrl())
+            ->setLength($sendungData->getLength())
+            ->setType($sendungData->getType())
+            ->setChecksum($sendungData->getChecksum())
+            ->save();
     }
 }

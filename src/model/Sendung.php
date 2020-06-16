@@ -14,7 +14,8 @@ class Sendung extends Model
 {
     public static $schema = "
         CREATE TABLE IF NOT EXISTS sendungen (
-                id INTEGER PRIMARY KEY, 
+                id INTEGER PRIMARY KEY,
+                checksum VARCHAR(32),
                 pubdate DATE, 
                 thema VARCHAR(255),
                 sender VARCHAR(255),
@@ -31,9 +32,22 @@ class Sendung extends Model
         ];
     }
 
-    public function truncateTable()
+    /**
+     * @return string
+     */
+    public function getChecksum()
     {
-        $this->_db->builder()->delete($this->getTable(), '1');
+        return $this->get('checksum');
+    }
+
+    /**
+     * @param $data
+     * @return $this
+     */
+    public function setChecksum($data)
+    {
+        $this->set('checksum', $data);
+        return $this;
     }
 
     /**

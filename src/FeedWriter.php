@@ -8,22 +8,16 @@
 
 namespace tm\rss;
 
-use MarcW\RssWriter\Extension\Atom\AtomLink;
 use MarcW\RssWriter\Extension\Atom\AtomWriter;
 use MarcW\RssWriter\Extension\Core\Channel;
-use MarcW\RssWriter\Extension\Core\Cloud;
 use MarcW\RssWriter\Extension\Core\CoreWriter;
 use MarcW\RssWriter\Extension\Core\Enclosure;
 use MarcW\RssWriter\Extension\Core\Guid;
 use MarcW\RssWriter\Extension\Core\Image;
 use MarcW\RssWriter\Extension\Core\Item;
 use MarcW\RssWriter\Extension\Core\Source;
-use MarcW\RssWriter\Extension\DublinCore\DublinCore;
 use MarcW\RssWriter\Extension\DublinCore\DublinCoreWriter;
-use MarcW\RssWriter\Extension\Itunes\ItunesChannel;
-use MarcW\RssWriter\Extension\Itunes\ItunesItem;
 use MarcW\RssWriter\Extension\Itunes\ItunesWriter;
-use MarcW\RssWriter\Extension\Slash\Slash;
 use MarcW\RssWriter\Extension\Slash\SlashWriter;
 use MarcW\RssWriter\Extension\Sy\Sy;
 use MarcW\RssWriter\Extension\Sy\SyWriter;
@@ -98,8 +92,8 @@ class FeedWriter
      */
     protected function addItems(Channel $channel, Source $source)
     {
-
         $sendungen = (new Database())->getSendungen();
+
         /** @var Sendung $sendung */
         foreach ($sendungen as $sendung) {
 
@@ -119,7 +113,7 @@ class FeedWriter
                 ->setEnclosure($enclosure)
                 ->setPubDate($pubdate)
                 ->setSource($source)
-                ->setGuid((new Guid())->setIsPermaLink(false)->setGuid('tag:jz:'.$sendung->get('id').':radio'));
+                ->setGuid((new Guid())->setIsPermaLink(false)->setGuid('tag:jz:'.$sendung->getChecksum().':radio'));
 
             $channel->addItem($item);
         }

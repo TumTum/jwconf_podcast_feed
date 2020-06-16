@@ -49,4 +49,19 @@ class Config
      */
     public static $database_path = __DIR__ . '/../var/feeddb.sqlite3.db';
 
+    /**
+     * prüft in der Datei /var/.env nach devMode = true;
+     * @return bool
+     */
+    public static function isDevMode()
+    {
+        $fileInfo = new \SplFileInfo(__DIR__ . '/../var/.env');
+
+        if ($fileInfo->isFile()) {
+            $ini_file = parse_ini_file($fileInfo->getPathname());
+            return isset($ini_file['devMode']) && $ini_file['devMode'] == true;
+        }
+
+        return false;
+    }
 }

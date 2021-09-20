@@ -108,7 +108,7 @@ class FeedWriter
             $item = new Item();
             $item->setTitle($sendung->getThema())
                 ->setDescription(sprintf('Radiosendungen wurde am "%s" ausgestrahlt im "%s"', $pubdate->format('d.m.Y'), $sendung->getSender()))
-                ->setLink(Config::$jwconf_url)
+                ->setLink($sendung->getUrl())
                 ->setAuthor($sendung->getSender())
                 ->setEnclosure($enclosure)
                 ->setPubDate($pubdate)

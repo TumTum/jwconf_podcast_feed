@@ -52,11 +52,11 @@ class FeedWriter
         $channel = new Channel();
 
         $image = new Image();
-        $image->setUrl('http://podcast.jwconf.oik.gr/apple-touch-icon_152x152.png')
+        $image->setUrl('http://podcast.jwconf.oik.gr/jz-sendung-icon.png')
             ->setTitle('JZ Sendungen')
             ->setLink('https://sendungen.jwconf.org/')
-            ->setWidth(152)
-            ->setHeight(152)
+            ->setWidth(350)
+            ->setHeight(350)
         ;
 
         $fileInfo = new \SplFileInfo(Config::$database_path);

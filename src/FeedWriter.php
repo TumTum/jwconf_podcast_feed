@@ -46,15 +46,15 @@ class FeedWriter
         $rssWriter->registerWriter(new DublinCoreWriter());
 
         $source = new Source();
-        $source->setUrl('https://jwconf.org/sendungen/')
+        $source->setUrl('https://sendungen.jwconf.org/')
             ->setTitle('Monatliche Radiosendungen von Jehovas Zeugen');
 
         $channel = new Channel();
 
         $image = new Image();
-        $image->setUrl('https://jwconf.org/images/icons/apple-touch-icon_152x152.png')
-            ->setTitle('JWConf')
-            ->setLink('https://jwconf.org')
+        $image->setUrl('http://podcast.jwconf.oik.gr/apple-touch-icon_152x152.png')
+            ->setTitle('JZ Sendungen')
+            ->setLink('https://sendungen.jwconf.org/')
             ->setWidth(152)
             ->setHeight(152)
         ;

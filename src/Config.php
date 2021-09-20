@@ -96,14 +96,14 @@ class Config
      *
      * @var string
      */
-    public static $jwconf_host = "https://jwconf.org/";
+    public static $jwconf_host = "https://sendungen.jwconf.org/";
 
     /**
      * Auf dieser Seite sind alle MP3 gelistet
      *
      * @var string
      */
-    public static $jwconf_url = "https://jwconf.org/sendungen/";
+    public static $jwconf_url = "https://sendungen.jwconf.org/";
 
     /**
      * Spcher ort der Datenbank

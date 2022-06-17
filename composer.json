@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "php": "^7.4",
     "marcw/rss-writer": "^0.4",
     "wa72/htmlpagedom": "^2",
     "ark/database": "^0.2",

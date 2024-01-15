@@ -1,0 +1,25 @@
+diff --git a/src/Util.php b/src/Util.php
+index abf926c..6841250 100644
+--- a/src/Util.php
++++ b/src/Util.php
+@@ -19,15 +19,15 @@ class Util {
+      */
+     public static function checkReconnectError($errorCode, $errorInfo, $exception) {
+         if ($exception) {
+-            if (stripos($exception->getMessage(), self::MYSQL_GONE_AWAY) !== false || stripos($exception->getMessage(), self::MYSQL_REFUSED) !== false) {
++            if (str_contains($exception->getMessage(), self::MYSQL_GONE_AWAY) || str_contains($exception->getMessage(), self::MYSQL_REFUSED)) {
+                 return true;
+             }
+-        } elseif ($errorInfo) {
+-            if (stripos($errorInfo[2], self::MYSQL_GONE_AWAY) !== false || stripos($errorInfo[2], self::MYSQL_REFUSED) !== false) {
++        } elseif ($errorInfo && $errorInfo[2]) {
++            if (str_contains($errorInfo[2], self::MYSQL_GONE_AWAY)|| str_contains($errorInfo[2], self::MYSQL_REFUSED)) {
+                 return true;
+             }
+         }
+ 
+         return false;
+     }
+-}
+\ No newline at end of file
++}

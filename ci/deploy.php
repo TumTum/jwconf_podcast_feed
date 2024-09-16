@@ -15,7 +15,7 @@ add('writable_dirs', []);
 // Hosts
 
 host('podcast.jwconf.oik.gr')
-    ->set('port', '8322')
+    ->set('port', '8329')
     ->set('php_version', '8.3')
     ->set('remote_user', 'deployer')
     ->set('deploy_path', '/srv/podcast.jwconf.oik.gr/html')

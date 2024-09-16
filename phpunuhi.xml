@@ -1,0 +1,50 @@
+<phpunuhi
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./vendor/boxblinkracer/phpunuhi/config.xsd"
+>
+
+    <translations>
+
+        <set name="Laravel-Auth">
+            <format>
+                <php sort="true"/>
+            </format>
+            <locales>
+                <locale name="de">./lang/%locale%/auth.php</locale>
+                <locale name="en">./lang/%locale%/auth.php</locale>
+            </locales>
+        </set>
+
+        <set name="Laravel-Pagination">
+            <format>
+                <php sort="true"/>
+            </format>
+            <locales>
+                <locale name="de">./lang/%locale%/pagination.php</locale>
+                <locale name="en">./lang/%locale%/pagination.php</locale>
+            </locales>
+        </set>
+
+        <set name="Laravel-Passwords">
+            <format>
+                <php sort="true"/>
+            </format>
+            <locales>
+                <locale name="de">./lang/%locale%/passwords.php</locale>
+                <locale name="en">./lang/%locale%/passwords.php</locale>
+            </locales>
+        </set>
+
+        <set name="Laravel-Validation">
+            <format>
+                <php sort="true"/>
+            </format>
+            <locales>
+                <locale name="de">./lang/%locale%/validation.php</locale>
+                <locale name="en">./lang/%locale%/validation.php</locale>
+            </locales>
+        </set>
+
+    </translations>
+
+</phpunuhi>

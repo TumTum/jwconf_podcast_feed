@@ -37,6 +37,14 @@
                                         </div>
 
                                         <div class="pt-3 sm:pt-5 lg:pt-0">
+                                            <h2 class="text-xl font-semibold text-black dark:text-white">Praktische Podcast-Lösung für JW Sendungen</h2>
+
+                                            <p class="mt-4 text-sm/relaxed">
+                                                Diese Seite bietet keine offiziellen Inhalte, sondern verwandelt die Sendungen von <a href="http://sendungen.jwconf.org">sendungen.jwconf.org</a> in einen praktischen Podcast-Feed. Dadurch hast du die Möglichkeit, die Sendungen bequem über deine bevorzugte Podcast-App zu verfolgen und behaltest stets den Überblick über gehörte und ungehörte Episoden.
+                                            </p>
+
+                                        </div>
+                                        <div class="pt-3 sm:pt-5 lg:pt-0">
                                             <h2 class="text-xl font-semibold text-black dark:text-white">Einrichtung</h2>
 
                                             <p class="mt-4 text-sm/relaxed">
@@ -68,7 +76,7 @@
                     </main>
 
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        Private by Tobi Matthaiou
+{{--                        Private by Tobi Matthaiou--}}
                     </footer>
                 </div>
             </div>

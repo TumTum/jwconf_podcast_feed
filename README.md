@@ -1,4 +1,9 @@
-JWConf RSS Feed
-===============
+Praktische Podcast-Lösung für JW Sendungen
+==========================================
 
-Dieser Service bietet einen Podcast Feed an mit alle JW Sendungen an.
+Dieser Code bietet keine offiziellen Inhalte, 
+sondern verwandelt die Sendungen von http://sendungen.jwconf.org in einen 
+praktischen Podcast-Feed.
+
+siehe https://podcast.jwconf.oik.gr/feed.xml
+
